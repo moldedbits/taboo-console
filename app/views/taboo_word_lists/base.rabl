@@ -1,1 +1,1 @@
-attributes :taboo_word,:option1,:option2,:option3,:option4,:option5
+attributes :word,:taboo_word_1,:taboo_word_2,:taboo_word_3,:taboo_word_4,:taboo_word_5

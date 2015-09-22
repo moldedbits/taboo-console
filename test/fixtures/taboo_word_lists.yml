@@ -2,18 +2,18 @@
 
 one:
   taboo_word: MyString
-  option1: MyString
-  option2: MyString
-  option3: MyString
-  option4: MyString
-  option5: MyString
-  flag: false
+  option_1: MyString
+  option_2: MyString
+  option_3: MyString
+  option_4: MyString
+  option_5: MyString
+  version_number: 1
 
 two:
   taboo_word: MyString
-  option1: MyString
-  option2: MyString
-  option3: MyString
-  option4: MyString
-  option5: MyString
-  flag: false
+  option_1: MyString
+  option_2: MyString
+  option_3: MyString
+  option_4: MyString
+  option_5: MyString
+  version_number: 1

@@ -1,2 +1,2 @@
-attributes :taboo_word,:option1,:option2,:option3,:option4,:option5
+attributes :taboo_word,:option_1,:option_2,:option_3,:option_4,:option_5
 collection @all_words, :root => "word_lists", :object_root => false

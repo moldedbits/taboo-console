@@ -1,0 +1,6 @@
+
+{
+  "status": "<%= @status ? @status : "success" %>",
+  "error": <%= @error.to_json.html_safe %>,
+  "result": <%= yield %>
+}

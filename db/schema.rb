@@ -11,18 +11,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150918114815) do
+ActiveRecord::Schema.define(version: 20150921090009) do
 
   create_table "taboo_word_lists", force: :cascade do |t|
-    t.string   "taboo_word"
-    t.string   "option1"
-    t.string   "option2"
-    t.string   "option3"
-    t.string   "option4"
-    t.string   "option5"
-    t.boolean  "flag"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.string   "word"
+    t.string   "taboo_word_1"
+    t.string   "taboo_word_2"
+    t.string   "taboo_word_3"
+    t.string   "taboo_word_4"
+    t.string   "taboo_word_5"
+    t.integer  "version_number"
+    t.datetime "created_at",     null: false
+    t.datetime "updated_at",     null: false
   end
 
 end
