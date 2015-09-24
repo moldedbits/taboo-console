@@ -9,13 +9,30 @@ class TabooWordListsController < ApplicationController
 
   def new
     @new_taboo_word = TabooWordList.new
+    @new_word_count = params[:new_word_count]
+    @words_with_error = params[:words_with_error]
+    @repeated_words = params[:repeated_words]
   end
 
   def create
-    uploaded_file_path = params[:upload].path
+    puts "sfskdnfksdfksdngksngksdngksdnf\n"
+    # request.query_string.split(/&/).inject({}) do |hash, setting|
+    #   key, val = setting.split(/=/)
+    #   hash[key.to_sym] = val
+    #   hash
+    # end
+    puts params[:file].to_s
+    uploaded_file_path = params[:file].path
+    # CSV.foreach(uploaded_file_path, headers: true) do |row|
+    #   row.to_a
+    #   TabooWordList.create! row.to_hash
+    # end
     word_lists = CSV.read(uploaded_file_path)
-    puts uploaded_file_path.to_s
-
+    puts params[:upload].to_s
+    new_word_count = 0
+    words_with_error = Array.new
+    repeated_words = Array.new
+    repeated_words = word_lists.collect {|x| x[0]}.select{|e| word_lists.collect{|x| x[0]}.count(e) > 1}.uniq
     # if word_lists.collect {|x| x[0]}.select{|e| word_lists.collect{|x| x[0]}.count(e) > 1}.blank?
       word_lists.each_with_index do |word,i|
         @new_taboo_word = TabooWordList.new()
@@ -27,17 +44,21 @@ class TabooWordListsController < ApplicationController
         @new_taboo_word.taboo_word_5 = word[5]
         @new_taboo_word.version_number = -1
         if word.length != 6
+          words_with_error << i + 1
           next
           @status = "Faliure"
           @error = []
-          @error<< "Line number " +  i.to_s + " has less than 6 words"
-          puts "Line number " +  i.to_s + " has an error"
-          break
+          @error<< "Line number " +  (i+1).to_s + " has less than 6 words"
+          puts "Line number " +  (i+1).to_s + " has an error"
         else
           @new_taboo_word.save
+          new_word_count = new_word_count + 1
         end
       end
-      redirect_to '/taboo_word_lists/new'
+      # render 'taboo_word_lists/new',status: @status
+
+      # redirect_to new_taboo_word_list_path(:new_word_count => new_word_count, :words_with_error => words_with_error, :repeated_words => repeated_words)
+
     # else
       # @status = "Faliure"
       # @error = []
