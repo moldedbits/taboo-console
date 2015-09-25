@@ -6,7 +6,7 @@ class ApplicationController < ActionController::Base
   protected
   def authenticate
     authenticate_or_request_with_http_basic do |username, password|
-      username == "admin" && password == "test"
+      username == (Rails.env.development? ? ENV['USERNAME_DEV'] : ENV['USERNAME_PRO'])&& password == (Rails.env.development? ? ENV['PASSWORD_DEV'] : ENV['PASSWORD_PRO'])
       # reset_session
     end
   end

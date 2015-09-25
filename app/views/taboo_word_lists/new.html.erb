@@ -1,22 +1,13 @@
-<h1>Upload New Word List</h1>
-
-<!-- <div class="row">
+<div class="row">
 	<div class="col-md-6 col-md-offset-3">
-    <%= form_tag '/taboo_word_lists/',multipart: true,method: :post do %>
-      <p>
-        <%= file_field_tag 'upload',accept: 'text/csv' %>
-      </p>
-      <p>
-        <%= submit_tag "Upload",data: {confirm: "Are you sure?"} %>
-      </p>
-    <% end %>
+		<h1>Upload New Word List</h1>
+		<form action="/taboo_word_lists">
+				<input type="file" id="file" name="file" accept="text/csv">
+				<input type="submit">
+		</form>
 	</div>
-</div> -->
+</div>
 
-<form>
-    <input type="file" id="file" name="file">
-    <input type="submit">
-</form>
 <script>
 	$( 'form' ).submit(function ( e ) {
 	    var fileInput = document.getElementById('file');
@@ -25,16 +16,12 @@
 			formData.append('file',file);
 			var xhr = new XMLHttpRequest();
 			xhr.open('post','http://localhost:3000/taboo_word_lists',true);
+			xhr.send(formData);
 			xhr.onreadystatechange = function() {
     		if (xhr.readyState == 4) {
-					alert("hello");
-					// defensive check
-      		if (typeof callback == "function") {
-        		// apply() sets the meaning of "this" in the callback
-        		callback.apply(xhr);
-      }
-    }
-  }
-			xhr.send(formData);
+					var a = JSON.parse(xhr.responseText);
+					alert("New Words Added : " + a.result.new_word_count + a.result.message + a.result.all_error_rows + "\n" + "Rows No. of file with error : " + a.result.words_with_error + "\n" +  "Repeating words in files : " + a.result.repeated_words)
+    		}
+  		}
 	});
 </script>
