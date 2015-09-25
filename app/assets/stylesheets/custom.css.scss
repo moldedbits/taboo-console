@@ -1,2 +1,40 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+input[type=file] {
+    margin: 0 auto;
+    opacity: 0.7;
+    margin-bottom: 1em;
+}
+
+#content{
+  text-align: center;
+}
+
+header{
+  background-color: #ef9739;
+}
+   p {
+     font-family: 'Rakoon_PersonalUse';
+     font-size: 5em;
+     text-align: center;
+   }
+@font-face {
+  font-family: 'Rakoon_PersonalUse';
+  src:font-url('Rakoon_PersonalUse.eot');
+  src:font-url('Rakoon_PersonalUse.eot?#iefix') format('embedded-opentype'),
+    font-url('Rakoon_PersonalUse.svg#Rakoon_PersonalUse') format('svg'),
+    font-url('Rakoon_PersonalUse.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+}
+footer {
+
+  background-color: #263541;
+  p {
+    font-size: 1em;
+    a{
+      color: #ef9739;
+    }
+  }
+}

@@ -1,8 +1,13 @@
+<%= render 'layouts/header' %>
 <div class="row">
 	<div class="col-md-6 col-md-offset-3">
     <h4><%= @available_words %> words are present to make them availble for publish</h4>
-    <%= button_to "Publish",{:controller => :taboo_word_lists, :action => 'change_version_number',:method => :post}, data: {confirm: "Are you sure?"}%>
+    <form>
+      <%= link_to "Publish", taboo_word_lists_change_version_number_path,method: :post, :class => 'btn btn-primary'%>
+    </form>
     <h4>Want to add upload new words to database, click below</h4>
-    <%= button_to "Go for upload",new_taboo_word_list_path,:class => "button",:method => :get %>
+    <form>
+      <%= link_to "Go for upload", new_taboo_word_list_path, :class => 'btn btn-primary'%>
+    </form>
 	</div>
 </div>
