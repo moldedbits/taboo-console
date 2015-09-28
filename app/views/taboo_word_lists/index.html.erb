@@ -1,13 +1,29 @@
 <%= render 'layouts/header' %>
 <div class="row">
-	<div class="col-md-6 col-md-offset-3">
+	<div class="col-sm-4" id="publishDiv">
     <h4><%= @available_words %> words are present to make them availble for publish</h4>
     <form>
       <%= link_to "Publish", taboo_word_lists_change_version_number_path,method: :post, :class => 'btn btn-primary'%>
     </form>
+	</div>
+	<div class="col-sm-4" id="uploadDiv">
     <h4>Want to add upload new words to database, click below</h4>
     <form>
       <%= link_to "Go for upload", new_taboo_word_list_path, :class => 'btn btn-primary'%>
     </form>
 	</div>
 </div>
+<% if  params[:new_word].present? %>
+	<div id="recentUpload">
+		<h4>In Recent Upload</h4>
+		<p>
+			<% if params[:message].blank? && params[:all_row_message].blank? %>
+				New Words Added : <%= params[:new_word] + params[:message] + params[:all_row_message]%> </br>
+				Row number(s) which has/have less than 6 words (Left out) : <%= params[:error_row].to_i > 0 ? params[:error_row] : 0  %></br>
+				Total number of repeating words in file (Left out) : <%= params[:repeat_words].to_i > 0 ? params[:repeat_words] : 0 %>
+			<% else %>
+				<%= params[:message] + params[:all_row_message]%>
+			<% end %>
+		</p>
+	</div>
+<% end %>

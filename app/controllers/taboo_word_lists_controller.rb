@@ -9,9 +9,6 @@ class TabooWordListsController < ApplicationController
 
   def new
     @new_taboo_word = TabooWordList.new
-    @new_word_count = params[:new_word_count]
-    @words_with_error = params[:words_with_error]
-    @repeated_words = params[:repeated_words]
   end
 
   def create
@@ -49,6 +46,9 @@ class TabooWordListsController < ApplicationController
   def change_version_number
     unpublished_words = TabooWordList.where(version_number: -1)
     current_version = TabooWordList.maximum("version_number")
+    if current_version == -1
+      current_version = 0
+    end
     unpublished_words.each do |word|
       word.version_number = current_version + 1
       word.save

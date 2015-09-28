@@ -2,9 +2,10 @@
 <div class="row">
 	<div id="content">
 		<h1>Upload New Word List</h1>
-		<form action="/taboo_word_lists">
+		<form>
 				<input type="file" id="file" name="file" class="btn btn-default btn-lg active" accept="text/csv" >
 				<input type="submit" class="btn btn-primary submit" >
+				<button formaction="/" class="btn btn-primary submit" id="backToHome">Go back to home</button>
 		</form>
 	</div>
 </div>
@@ -21,7 +22,7 @@
 			xhr.onreadystatechange = function() {
     		if (xhr.readyState == 4) {
 					var a = JSON.parse(xhr.responseText);
-					alert("New Words Added : " + a.result.new_word_count + a.result.message + a.result.all_error_rows + "\n" + "Rows No. of file with error : " + a.result.words_with_error + "\n" +  "Repeating words in files : " + a.result.repeated_words)
+					window.location = "http://localhost:3000?new_word=" + a.result.new_word_count + "&message=" + a.result.message + "&all_row_message=" + a.result.all_error_rows + "&error_row=" + a.result.words_with_error + "&repeat_words=" + a.result.repeated_words.length;
     		}
   		}
 	});
