@@ -16,5 +16,5 @@ class ApplicationController < ActionController::Base
     @error = []
     @error<< "#{message}"
   end
-  helper_method :errors
+  helper_method :errors, :authenticate
 end
