@@ -1,5 +1,4 @@
 class TabooWordListsController < ApplicationController
-  before_action :authenticate, :except => :create
   require 'ostruct'
   require 'open-uri'
   require 'csv'
