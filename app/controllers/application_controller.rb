@@ -10,4 +10,11 @@ class ApplicationController < ActionController::Base
       # reset_session
     end
   end
+
+  def errors(message)
+    @status = "Failure"
+    @error = []
+    @error<< "#{message}"
+  end
+  helper_method :errors
 end

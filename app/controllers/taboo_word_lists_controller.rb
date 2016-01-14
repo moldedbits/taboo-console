@@ -49,34 +49,50 @@ class TabooWordListsController < ApplicationController
     if current_version == -1
       current_version = 0
     end
-    unpublished_words.each do |word|
-      word.version_number = current_version + 1
-      word.save
+    if unpublished_words.blank?
+      redirect_to '/taboo_word_lists'
+    else
+      unpublished_words.each do |word|
+        word.version_number = current_version + 1
+        word.save
+      end
+      redirect_to '/taboo_word_lists'
     end
-    redirect_to '/taboo_word_lists'
   end
 
   def check_updates
-    current_version = TabooWordList.maximum("version_number")
-    @words_available = OpenStruct.new
-    if params[:vno].to_i >= current_version
-      @status = "Faliure"
-      @error = []
-      @error<< "You have latest version"
+    if params[:vno].present?
+      current_version = TabooWordList.maximum("version_number")
+      if current_version.blank?
+        errors(message = "wordlist is blank")
+      else
+        @words_available = OpenStruct.new
+        if params[:vno].to_i >= current_version
+          errors(message = "You have latest version")
+        else
+          @words_available.new_version = current_version
+          @words_available.save
+        end
+      end
     else
-      @words_available.new_version = current_version
-      @words_available.save
+      errors(message = "version number parameter missing")
     end
   end
 
   def fetch_new_word
-    current_version = TabooWordList.maximum("version_number")
-    if params[:vno].to_i >= current_version
-      @status = "Faliure"
-      @error = []
-      @error<< "You have updated wordlist"
+    if params[:vno].present?
+      current_version = TabooWordList.maximum("version_number")
+      if current_version.blank?
+        errors(message = "wordlist is blank")
+      else
+        if params[:vno].to_i >= current_version
+          errors(message = "You have updated wordlist")
+        else
+          @new_words = TabooWordList.where("version_number > ?",params[:vno])
+        end
+      end
     else
-      @new_words = TabooWordList.where("version_number > ?",params[:vno])
+      errors(message = "version number parameter missing")
     end
   end
 
