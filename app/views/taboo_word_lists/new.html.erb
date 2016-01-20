@@ -17,12 +17,12 @@
 			var formData = new FormData();
 			formData.append('file',file);
 			var xhr = new XMLHttpRequest();
-			xhr.open('post','http://localhost:3000/taboo_word_lists',true);
+			xhr.open('post','/taboo_word_lists',true);
 			xhr.send(formData);
 			xhr.onreadystatechange = function() {
     		if (xhr.readyState == 4) {
 					var a = JSON.parse(xhr.responseText);
-					window.location = "http://localhost:3000?new_word=" + a.result.new_word_count + "&message=" + a.result.message + "&all_row_message=" + a.result.all_error_rows + "&error_row=" + a.result.words_with_error + "&repeat_words=" + a.result.repeated_words.length;
+					window.location = window.location.origin + "?new_word=" + a.result.new_word_count + "&message=" + a.result.message + "&all_row_message=" + a.result.all_error_rows + "&error_row=" + a.result.words_with_error + "&repeat_words=" + a.result.repeated_words.length;
     		}
   		}
 	});
